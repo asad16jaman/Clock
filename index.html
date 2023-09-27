@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .ll{
+            width: 77px;
+            height: 2px;
+            border-radius: 1px;
+            background: linear-gradient(to right,black,red);
+        }
+        .timedenoter{
+            transform-origin: left center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            z-index: 50;
+        }
+
+        .mm{
+            width: 60px;
+            height: 3px;
+            border-radius: 2px;
+            background: linear-gradient(to right,orange,green);
+        }
+        .hh{
+            width: 55px;
+            height: 5px;
+            border-radius: 3px;
+            background: linear-gradient(to right,pink,blue);
+            z-index: 10;
+        }
+
+    .myclock{
+        width: 200px;
+        height: 200px;
+        margin: 50px auto;
+        border-radius: 50%;
+        position: relative;
+        background: url("5054.png") no-repeat center / cover;
+    }
+
+
+
+    .myclock span{
+        bottom: 60px;
+        left: 66px;
+        position: absolute;
+        z-index: 10;
+    }
+    </style>
+</head>
+<body>
+
+
+
+
+    <div class="myclock">
+        <div class="ll timedenoter"></div>
+        <div class="mm timedenoter"></div>
+        <div class="hh timedenoter"></div>
+        <span><!--date is show hare--></span>
+    </div>
+
+
+    <script>
+
+        let ele = document.querySelector(".ll");
+        let mmele = document.querySelector(".mm");
+        let hhele = document.querySelector(".hh");
+        let dateshow = document.querySelector(".myclock span")
+        
+        let ddd = new Date();
+        dateshow.innerHTML = `${ddd.getDate()}-${ddd.getMonth()+1}-${ddd.getFullYear()}`
+
+        function getSecondTime(){
+            const d = new Date();
+            return d.getSeconds()
+        }
+
+        function getMinuteTime(){
+            const d = new Date();
+            return d.getMinutes();
+
+        }
+        function getHoureTime(){
+            const d = new Date();
+            return d.getHours();
+
+        }
+        ele.style.transform = `rotate(${(getSecondTime()*6)-90}deg)`;
+        mmele.style.transform = `rotate(${(getMinuteTime()*6)-90}deg)`
+        hhele.style.transform = `rotate(${getHoureTime()*30 - 90}deg)`
+        let minute = getMinuteTime();
+        let hour = getHoureTime();
+        setInterval(()=>{
+            if(getSecondTime()==0){
+                minute +=1
+            }
+            if(minute==60){
+                minute = 0
+                hour += 1
+            }
+            if(hour==24){
+                hour = 0
+            }
+            ele.style.transform = `rotate(${(getSecondTime()*6)-90}deg)`;
+            mmele.style.transform = `rotate(${(minute*6)-90}deg)`
+            hhele.style.transform = `rotate(${(getHoureTime()*30)-90}deg)`
+        },1000)
+
+    </script>
+
+
+    
+</body>
+</html>
