@@ -41,9 +41,6 @@
         position: relative;
         background: url("5054.png") no-repeat center / cover;
     }
-
-
-
     .myclock span{
         bottom: 60px;
         left: 66px;
@@ -90,11 +87,12 @@
             return d.getHours();
 
         }
-        ele.style.transform = `rotate(${(getSecondTime()*6)-90}deg)`;
-        mmele.style.transform = `rotate(${(getMinuteTime()*6)-90}deg)`
-        hhele.style.transform = `rotate(${getHoureTime()*30 - 90}deg)`
         let minute = getMinuteTime();
         let hour = getHoureTime();
+        ele.style.transform = `rotate(${(getSecondTime()*6)-90}deg)`;
+        mmele.style.transform = `rotate(${(getMinuteTime()*6)-90}deg)`
+        hhele.style.transform = `rotate(${((getHoureTime()*30)-90)+(minute/2)}deg)`
+        
         setInterval(()=>{
             if(getSecondTime()==0){
                 minute +=1
@@ -106,9 +104,10 @@
             if(hour==24){
                 hour = 0
             }
+            console.log(minute)
             ele.style.transform = `rotate(${(getSecondTime()*6)-90}deg)`;
             mmele.style.transform = `rotate(${(minute*6)-90}deg)`
-            hhele.style.transform = `rotate(${(getHoureTime()*30)-90}deg)`
+            hhele.style.transform = `rotate(${((getHoureTime()*30)-90)+(minute/2)}deg)`
         },1000)
 
     </script>
